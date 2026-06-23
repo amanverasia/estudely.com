@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="404">
+  <Header />
+  <main class="wrap notfound">
+    <div class="err">$ cd {Astro.url.pathname}</div>
+    <p class="msg">bash: no such file or directory</p>
+    <h1>404</h1>
+    <p>That page doesn't exist. <a href="/">cd ~</a></p>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .notfound { padding: 80px 0; font-family: var(--mono); }
+  .err { color: var(--accent); }
+  .msg { color: var(--fg-dim); }
+  .notfound h1 { font-size: 64px; margin: 24px 0 8px; }
+  .notfound a { border-bottom: 1px solid var(--border); }
+</style>
