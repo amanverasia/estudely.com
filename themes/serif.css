@@ -1,0 +1,29 @@
+/* Serif — bookish, Georgia, larger text, cream paper. Light-centric. */
+
+:root {
+    --width: 680px;
+    --font-main: Georgia, "Times New Roman", serif;
+    --font-secondary: Georgia, "Times New Roman", serif;
+    --font-scale: 1.15em;
+    --background-color: #faf8f5;
+    --heading-color: #1a1a1a;
+    --text-color: #33302e;
+    --link-color: #8b4513;
+    --visited-color: #6b3410;
+    --code-background-color: #f0ece4;
+    --code-color: #1a1a1a;
+    --blockquote-color: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1a1816;
+        --heading-color: #e8e6e3;
+        --text-color: #c9c7c4;
+        --link-color: #d4a574;
+        --visited-color: #b0886a;
+        --code-background-color: #2a2826;
+        --code-color: #d4c4b4;
+        --blockquote-color: #888;
+    }
+}

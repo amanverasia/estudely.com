@@ -41,6 +41,18 @@ DESCRIPTION = (
     "interested in learning tech."
 )
 LANG = "en"
+DEFAULT_THEME = "default"
+THEMES = [
+    ("default", "Default"),
+    ("solarized", "Solarized"),
+    ("dracula", "Dracula"),
+    ("nord", "Nord"),
+    ("rose-pine", "Rosé Pine"),
+    ("terminal", "Terminal"),
+    ("serif", "Serif"),
+    ("contrast", "Contrast"),
+    ("minimal", "Minimal"),
+]
 # nav items: (label, href)
 NAV = [
     ("Home", "/"),
@@ -209,6 +221,11 @@ def render_page(
         "<!--MAIN-->": main,
         "<!--OG_IMAGE-->": og_image_tags,
         "<!--JSONLD-->": jsonld,
+        "<!--DEFAULT_THEME-->": DEFAULT_THEME,
+        "<!--THEME_OPTIONS-->": "\n".join(
+            f'        <option value="{val}"{" selected" if val == DEFAULT_THEME else ""}>{label}</option>'
+            for val, label in THEMES
+        ),
     }
     out = tpl
     for k, v in repl.items():
@@ -308,6 +325,9 @@ def main():
     # CNAME file (custom domain, required by GitHub Pages)
     if (ROOT / "CNAME").exists():
         shutil.copy2(ROOT / "CNAME", OUT / "CNAME")
+    # theme CSS files (copied from themes/ dir so the JS picker can swap them)
+    if (ROOT / "themes").exists():
+        shutil.copytree(ROOT / "themes", OUT / "themes")
 
     # syntax-highlighting themes (generated per build so no manual step)
     light_css, dark_css = generate_pygments_css()

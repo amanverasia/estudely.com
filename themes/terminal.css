@@ -1,0 +1,31 @@
+/* Terminal — retro green-on-black, monospace. Always dark. */
+
+:root {
+    --width: 740px;
+    --font-main: "Courier New", Courier, monospace;
+    --font-secondary: "Courier New", Courier, monospace;
+    --font-scale: 1em;
+    --background-color: #0c0c0c;
+    --heading-color: #00ff41;
+    --text-color: #00cc33;
+    --link-color: #00ff41;
+    --visited-color: #33cc33;
+    --code-background-color: #1a1a1a;
+    --code-color: #00ff41;
+    --blockquote-color: #00aa22;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-style: dashed;
+}
+
+nav a {
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.title h1 {
+    font-size: 1.3em;
+    text-transform: uppercase;
+}

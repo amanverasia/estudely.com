@@ -1,0 +1,16 @@
+/* Nord — cool arctic blue-grey palette. Always dark. */
+
+:root {
+    --width: 720px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #2e3440;
+    --heading-color: #88c0d0;
+    --text-color: #d8dee9;
+    --link-color: #81a1c1;
+    --visited-color: #b48ead;
+    --code-background-color: #3b4252;
+    --code-color: #e5e9f0;
+    --blockquote-color: #4c566a;
+}

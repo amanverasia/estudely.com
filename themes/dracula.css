@@ -1,0 +1,16 @@
+/* Dracula — famous dark code-editor theme. Purple / cyan / pink. Always dark. */
+
+:root {
+    --width: 720px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #282a36;
+    --heading-color: #bd93f9;
+    --text-color: #f8f8f2;
+    --link-color: #8be9fd;
+    --visited-color: #ff79c6;
+    --code-background-color: #44475a;
+    --code-color: #f8f8f2;
+    --blockquote-color: #6272a4;
+}

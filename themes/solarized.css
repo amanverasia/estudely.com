@@ -1,0 +1,29 @@
+/* Solarized — Ethan Schoonover's precision palette. Warm light / cool dark. */
+
+:root {
+    --width: 720px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #fdf6e3;
+    --heading-color: #073642;
+    --text-color: #586e75;
+    --link-color: #268bd2;
+    --visited-color: #6c71c4;
+    --code-background-color: #eee8d5;
+    --code-color: #073642;
+    --blockquote-color: #657b83;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #002b36;
+        --heading-color: #93a1a1;
+        --text-color: #839496;
+        --link-color: #268bd2;
+        --visited-color: #6c71c4;
+        --code-background-color: #073642;
+        --code-color: #93a1a1;
+        --blockquote-color: #586e75;
+    }
+}

@@ -1,0 +1,29 @@
+/* Minimal — bare-bones, nearly no colour. Auto light/dark. */
+
+:root {
+    --width: 680px;
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-secondary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-scale: 1em;
+    --background-color: #fff;
+    --heading-color: #111;
+    --text-color: #333;
+    --link-color: #0366d6;
+    --visited-color: #6f42c1;
+    --code-background-color: #f6f8fa;
+    --code-color: #111;
+    --blockquote-color: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #111;
+        --heading-color: #eee;
+        --text-color: #ccc;
+        --link-color: #58a6ff;
+        --visited-color: #bc8cff;
+        --code-background-color: #1a1a1a;
+        --code-color: #ddd;
+        --blockquote-color: #777;
+    }
+}

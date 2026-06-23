@@ -1,0 +1,29 @@
+/* Contrast — high-contrast accessibility. Pure black/white light, inverted dark. */
+
+:root {
+    --width: 720px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #fff;
+    --heading-color: #000;
+    --text-color: #000;
+    --link-color: #0000ee;
+    --visited-color: #551a8b;
+    --code-background-color: #eee;
+    --code-color: #000;
+    --blockquote-color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #000;
+        --heading-color: #fff;
+        --text-color: #fff;
+        --link-color: #ff0;
+        --visited-color: #a0f;
+        --code-background-color: #111;
+        --code-color: #fff;
+        --blockquote-color: #fff;
+    }
+}

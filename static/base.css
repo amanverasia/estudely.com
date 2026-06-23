@@ -1,34 +1,14 @@
 /*
- * estudely.com theme — Bear Blog's default theme, verbatim.
- * Only customization vs. upstream: --width: 720px (upstream default is 800px).
- * Source: the live <style> block served by Bear Blog for estudely.com.
+ * estudely.com — shared structural styles (layout, typography, components).
+ * Colors, fonts, and spacing are driven by CSS custom properties defined in
+ * each theme file (themes/*.css). The theme file is loaded *before* this
+ * stylesheet so the variables are already set.
  */
 :root {
     --width: 720px;
     --font-main: Verdana, sans-serif;
     --font-secondary: Verdana, sans-serif;
     --font-scale: 1em;
-    --background-color: #fff;
-    --heading-color: #222;
-    --text-color: #444;
-    --link-color: #3273dc;
-    --visited-color:  #8b6fcb;
-    --code-background-color: #f2f2f2;
-    --code-color: #222;
-    --blockquote-color: #222;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background-color: #01242e;
-        --heading-color: #eee;
-        --text-color: #ddd;
-        --link-color: #8cc2dd;
-        --visited-color:  #8b6fcb;
-        --code-background-color: #000;
-        --code-color: #ddd;
-        --blockquote-color: #ccc;
-    }
 }
 
 body {
@@ -74,9 +54,9 @@ button {
 }
 
 time {
- 	font-family: monospace;
-  	font-style: normal;
-  	font-size: 15px;
+    font-family: monospace;
+    font-style: normal;
+    font-size: 15px;
 }
 
 main {
@@ -170,4 +150,27 @@ ul.blog-posts li a:visited {
 
 .post-nav-newer {
     text-align: right;
+}
+
+/* theme switcher */
+#theme-switcher {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px dashed;
+}
+
+#theme-switcher select {
+    font-family: var(--font-secondary);
+    font-size: 0.85em;
+    padding: 4px 8px;
+    border: 1px solid var(--text-color);
+    border-radius: 4px;
+    background: var(--background-color);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+#theme-switcher label {
+    font-size: 0.85em;
+    margin-right: 6px;
 }

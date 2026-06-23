@@ -22,9 +22,10 @@
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E🐼%3C/text%3E%3C/svg%3E">
 
-  <link rel="stylesheet" href="<!--PRE-->static/style.css">
-  <link rel="stylesheet" href="<!--PRE-->static/syntax-light.css" media="(prefers-color-scheme: light)">
-  <link rel="stylesheet" href="<!--PRE-->static/syntax-dark.css" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="<!--PRE-->themes/<!--DEFAULT_THEME-->.css" id="theme-style">
+  <link rel="stylesheet" href="<!--PRE-->static/base.css">
+  <link rel="stylesheet" href="<!--PRE-->static/syntax-light.css" id="syntax-light" media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href="<!--PRE-->static/syntax-dark.css" id="syntax-dark" media="(prefers-color-scheme: dark)">
 <!--JSONLD-->
 </head>
 
@@ -41,6 +42,57 @@
 <!--MAIN-->
   </main>
   <footer>
+    <div id="theme-switcher">
+      <label for="theme-picker">Theme:</label>
+      <select id="theme-picker" onchange="switchTheme(this.value)">
+<!--THEME_OPTIONS-->
+      </select>
+    </div>
   </footer>
+  <script>
+(function () {
+  var THEMES = [
+    ['default', 'Default'],
+    ['solarized', 'Solarized'],
+    ['dracula', 'Dracula'],
+    ['nord', 'Nord'],
+    ['rose-pine', 'Rosé Pine'],
+    ['terminal', 'Terminal'],
+    ['serif', 'Serif'],
+    ['contrast', 'Contrast'],
+    ['minimal', 'Minimal']
+  ];
+  var FORCED_DARK = ['dracula', 'nord', 'rose-pine', 'terminal'];
+  var FORCED_LIGHT = [];
+  var SAVED = localStorage.getItem('theme') || 'default';
+  var ACTIVE = SAVED;
+
+  function apply(name) {
+    var link = document.getElementById('theme-style');
+    if (link) link.href = link.href.replace(/themes\/[^/]+\.css/, 'themes/' + name + '.css');
+    var sl = document.getElementById('syntax-light');
+    var sd = document.getElementById('syntax-dark');
+    if (sl && sd) {
+      if (FORCED_DARK.indexOf(name) >= 0) {
+        sl.disabled = true; sd.disabled = false; sd.media = 'all';
+      } else if (FORCED_LIGHT.indexOf(name) >= 0) {
+        sl.disabled = false; sl.media = 'all'; sd.disabled = true;
+      } else {
+        sl.disabled = false; sl.media = '(prefers-color-scheme: light)';
+        sd.disabled = false; sd.media = '(prefers-color-scheme: dark)';
+      }
+    }
+    var picker = document.getElementById('theme-picker');
+    if (picker) picker.value = name;
+    ACTIVE = name;
+  }
+
+  if (SAVED !== 'default') apply(SAVED);
+  window.switchTheme = function (name) {
+    localStorage.setItem('theme', name);
+    apply(name);
+  };
+})();
+  </script>
 </body>
 </html>
