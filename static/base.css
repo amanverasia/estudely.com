@@ -40,8 +40,24 @@ a:hover {
     text-decoration: underline;
 }
 
+nav p {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
 nav a {
     margin-right: 8px;
+}
+
+nav a:last-of-type {
+    margin-right: 0;
+}
+
+#theme-switcher {
+    margin-left: auto;
+    white-space: nowrap;
 }
 
 strong, b {
@@ -152,12 +168,7 @@ ul.blog-posts li a:visited {
     text-align: right;
 }
 
-/* theme switcher (in header, right-aligned below nav) */
-#theme-switcher {
-    margin-top: 4px;
-    text-align: right;
-}
-
+/* theme switcher (in nav row, pushed right via margin-left: auto) */
 #theme-switcher select {
     font-family: var(--font-secondary);
     font-size: 0.82em;
