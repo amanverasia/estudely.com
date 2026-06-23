@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+import { SOCIALS } from '../consts';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const recent = posts.slice(0, 5);
+---
+<BaseLayout>
+  <Header />
+  <main class="wrap">
+    <section class="hero">
+      <div class="greeting">$ whoami</div>
+      <h1>Aman Verasia<span class="cursor">_</span></h1>
+      <p>Cybersecurity engineer based in Ahmedabad. I break things, secure things,
+         and teach the rest on <strong>Estudely</strong>. Notes on infosec, AI,
+         and the occasional rabbit hole.</p>
+      <div class="socials">
+        {SOCIALS.map((s) => <a href={s.href}>{s.label}</a>)}
+      </div>
+    </section>
+    <div class="sec-label">recent posts</div>
+    <ul class="posts">{recent.map((post) => <PostCard post={post} />)}</ul>
+    <a class="more" href="/blog">cat blog/* →</a>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .hero { padding: 60px 0 40px; }
+  .greeting { font-family: var(--mono); color: var(--accent); font-size: 14px; margin-bottom: 14px; }
+  .hero h1 { font-family: var(--mono); font-size: 30px; line-height: 1.25; margin: 0 0 18px; letter-spacing: -.5px; }
+  .hero p { color: var(--fg-dim); font-size: 16px; max-width: 560px; margin: 0 0 24px; }
+  .socials { display: flex; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 13px; }
+  .socials a { color: var(--fg-dim); border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  .socials a:hover { color: var(--accent); border-color: var(--accent); }
+  .sec-label { font-family: var(--mono); font-size: 13px; color: var(--fg-faint); margin: 48px 0 8px; }
+  .sec-label::before { content: '// '; color: var(--accent); }
+  .posts { list-style: none; margin: 0; padding: 0; }
+  .more { font-family: var(--mono); font-size: 13.5px; color: var(--accent); display: inline-block; margin-top: 24px; }
+  .more:hover { text-decoration: underline; }
+</style>
