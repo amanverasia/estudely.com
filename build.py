@@ -30,8 +30,7 @@ DOMAIN = "https://estudely.com"
 SITE_TITLE = "Estudely"
 DESCRIPTION = (
     "This is the blogsite for Estudely; A Community of people who are "
-    "interested in learning tech.\n\nSubscribe to my blog via email or "
-    "RSS feed...."
+    "interested in learning tech."
 )
 LANG = "en"
 # nav items: (label, href)
@@ -98,28 +97,9 @@ def nav_html(prefix="./"):
     return " ".join(f'<a href="{prefix}{href.lstrip("/")}">{label}</a>' for label, href in NAV)
 
 
-# Footer subscribe form. Bear Blog's original POSTs to /email-subscribe/ (a
-# backend that does not exist on static hosting). This replica keeps the form
-# visually identical but handles submit gracefully client-side. Wire it to a
-# real provider (Buttondown/Formspree) by replacing estudelySubscribe().
-FOOTER_FORM = """<h4 id="subscribe-to-my-blog">Subscribe to my blog</h4>
-<form class="email-signup" onsubmit="return estudelySubscribe(event)">
-  <input type="text" name="name" autocomplete="off" style="display:none">
-  <input type="email" placeholder="Email address..." name="email" required
-         autocomplete="off" style="background-color:#eceff4;padding:5px">
-  <br>
-  <input type="submit" value="Subscribe">
-</form>
-<p id="signup-msg" style="font-style:italic"></p>
-<script>
-function estudelySubscribe(e){
-  e.preventDefault();
-  var f=e.target, msg=document.getElementById('signup-msg');
-  msg.textContent='Thanks! Email subscriptions are not active on this mirror yet \\u2014 please use the RSS feed.';
-  f.reset();
-  return false;
-}
-</script>"""
+# The footer subscribe form has been removed. Kept as an empty string so the
+# <!--FOOTER_FORM--> placeholder in the template renders to nothing.
+FOOTER_FORM = ""
 
 
 def render_page(*, title, og_title, og_type, canonical, page_type, main, path_prefix="./"):
