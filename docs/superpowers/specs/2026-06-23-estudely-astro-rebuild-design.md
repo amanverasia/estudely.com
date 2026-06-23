@@ -14,7 +14,7 @@ existing custom domain (`estudely.com`). Replaces the current Python
 ## Scope
 
 - Fresh Astro build on the `astro-rebuild` branch.
-- Wire the existing 9 markdown posts into Astro's content system so they build,
+- Wire the existing 8 markdown posts into Astro's content system so they build,
   but content polish is deferred. Design and structure are the focus now.
 - Branding stays **Estudely** (consistent with the YouTube channel), with bio
   and links sourced from the existing about-me content.
@@ -60,7 +60,7 @@ posts, no React islands needed yet; can add later without rework).
 
 ## Content Model
 
-Blog collection schema (`src/content/config.ts`):
+Blog collection schema (`src/content.config.ts`, Astro Content Layer with glob loader):
 
 | Field        | Type      | Notes                                              |
 |--------------|-----------|----------------------------------------------------|
