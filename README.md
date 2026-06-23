@@ -88,9 +88,9 @@ point your own domain at a fork:
 The **theme/HTML** (Bear Blog's `default.css` skeleton) belongs to
 [Bear Blog](https://bearblog.dev) / Herman Martinus.
 
-All **blog content** under [`content/`](content/) (posts and pages) is © Estudely
-and is **not** licensed for redistribution — please don't copy the articles.
-The build tooling itself is free to read, fork, and learn from.
+All **blog content** under [`content/`](content/) and the build tooling itself
+are © Estudely / Aman Verasia — **all rights reserved**. This is a personal
+website; please do not copy, redistribute, or republish any part of it.
 
 ## 🔗 Links
 

@@ -155,3 +155,19 @@ ul.blog-posts li span {
 ul.blog-posts li a:visited {
     color: var(--visited-color);
 }
+
+/* previous / next post navigation */
+.post-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 15px;
+    border-top: 1px dashed;
+    font-size: 0.95em;
+}
+
+.post-nav-older {}
+
+.post-nav-newer {
+    text-align: right;
+}
