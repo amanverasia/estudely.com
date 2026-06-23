@@ -1,0 +1,26 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><span class="prompt">~/estudely</span> $ <span class="cursor">▋</span></a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="/blog">blog</a>
+        <a href="/about">about</a>
+        <a href="/rss.xml">rss</a>
+      </nav>
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+<style>
+  header { border-bottom: 1px solid var(--border); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px; }
+  .brand { font-family: var(--mono); font-weight: 700; font-size: 15px; color: var(--fg); letter-spacing: -.3px; }
+  .brand .prompt { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 22px; }
+  .nav-links { display: flex; gap: 20px; }
+  .nav-links a { font-family: var(--mono); font-size: 13.5px; color: var(--fg-dim); }
+  .nav-links a:hover { color: var(--accent); }
+</style>

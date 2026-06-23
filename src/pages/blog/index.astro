@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<BaseLayout title="Blog" description="All posts.">
+  <Header />
+  <main class="wrap">
+    <div class="sec-label">all posts</div>
+    <ul class="posts">{posts.map((post) => <PostCard post={post} />)}</ul>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .sec-label { font-family: var(--mono); font-size: 13px; color: var(--fg-faint); margin: 48px 0 8px; }
+  .sec-label::before { content: '// '; color: var(--accent); }
+  .posts { list-style: none; margin: 0; padding: 0; }
+</style>
