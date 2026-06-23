@@ -158,9 +158,10 @@ Schema makes `description`, `tags`, `draft` optional so existing posts
 
 ```ts
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
@@ -488,9 +489,9 @@ import { readingTime } from '../utils/readingTime';
 
 interface Props { post: CollectionEntry<'blog'> }
 const { post } = Astro.props;
-const url = `/blog/${post.slug}/`;
+const url = `/blog/${post.id}/`;
 const dateStr = post.data.date.toISOString().slice(0, 10);
-const rt = readingTime(post.body);
+const rt = readingTime(post.body ?? '');
 ---
 <li class="post-item">
   <a href={url}>
@@ -514,8 +515,9 @@ const rt = readingTime(post.body);
 </style>
 ```
 
-Note: `post.slug` is Astro's collection slug (the filename), which matches the
-existing `slug` frontmatter values, so URLs stay stable.
+Note: `post.id` is Astro's content-layer entry id (the filename without
+extension), which matches the existing `slug` frontmatter values, so URLs
+stay stable.
 
 - [ ] **Step 3: Verify compile**
 
@@ -620,7 +622,7 @@ interface Props { post: CollectionEntry<'blog'> }
 const { post } = Astro.props;
 const { title, date, description, tags } = post.data;
 const dateStr = date.toISOString().slice(0, 10);
-const rt = readingTime(post.body);
+const rt = readingTime(post.body ?? '');
 const tagStr = tags.map((t) => `#${t}`).join(' ');
 ---
 <BaseLayout title={title} description={description}>
@@ -654,16 +656,16 @@ const tagStr = tags.map((t) => `#${t}`).join(' ');
 
 ```astro
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 <PostLayout post={post}>
   <Content />
@@ -819,7 +821,7 @@ export async function GET(context) {
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description ?? '',
-      link: `/blog/${post.slug}/`,
+      link: `/blog/${post.id}/`,
     })),
   });
 }
