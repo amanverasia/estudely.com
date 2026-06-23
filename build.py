@@ -195,8 +195,18 @@ def main():
     posts = load("content/posts")
     posts.sort(key=lambda i: i["date_iso"], reverse=True)
 
-    # ---- home (landing) ----
+    # ---- home (landing) — includes recent posts list (Bear Blog layout) ----
     home = next((p for p in pages if p["slug"] == "home"), None)
+    home_rows = [
+        '<li data-tags="">'
+        f'<span><i><time datetime="{p["date_iso"]}">'
+        f'{fmt_date(p["date_iso"])}</time></i></span>'
+        f'<a href="{p["slug"]}/">{html.escape(p["title"])}</a>'
+        "</li>"
+        for p in posts
+    ]
+    home_main = (home["html"] if home else "<p>No posts yet</p>")
+    home_main += '\n<ul class="blog-posts">\n' + "\n".join(home_rows) + "\n</ul>"
     write(
         "index.html",
         render_page(
@@ -205,7 +215,7 @@ def main():
             og_type="website",
             canonical=f"{DOMAIN}/",
             page_type="home",
-            main=home["html"] if home else "<p>No posts yet</p>",
+            main=home_main,
         ),
     )
 
