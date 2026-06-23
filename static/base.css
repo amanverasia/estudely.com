@@ -152,25 +152,31 @@ ul.blog-posts li a:visited {
     text-align: right;
 }
 
-/* theme switcher */
+/* theme switcher (in header, right-aligned below nav) */
 #theme-switcher {
-    margin-top: 18px;
-    padding-top: 12px;
-    border-top: 1px dashed;
+    margin-top: 4px;
+    text-align: right;
 }
 
 #theme-switcher select {
     font-family: var(--font-secondary);
-    font-size: 0.85em;
-    padding: 4px 8px;
+    font-size: 0.82em;
+    padding: 2px 6px;
     border: 1px solid var(--text-color);
     border-radius: 4px;
     background: var(--background-color);
     color: var(--text-color);
     cursor: pointer;
+    opacity: 0.7;
+}
+
+#theme-switcher select:hover,
+#theme-switcher select:focus {
+    opacity: 1;
 }
 
 #theme-switcher label {
-    font-size: 0.85em;
-    margin-right: 6px;
+    font-size: 0.82em;
+    margin-right: 4px;
+    opacity: 0.6;
 }
