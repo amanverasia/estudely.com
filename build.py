@@ -94,8 +94,8 @@ def load(base):
     return items
 
 
-def nav_html():
-    return " ".join(f'<a href="{href}">{label}</a>' for label, href in NAV)
+def nav_html(prefix="./"):
+    return " ".join(f'<a href="{prefix}{href.lstrip("/")}">{label}</a>' for label, href in NAV)
 
 
 # Footer subscribe form. Bear Blog's original POSTs to /email-subscribe/ (a
@@ -122,7 +122,7 @@ function estudelySubscribe(e){
 </script>"""
 
 
-def render_page(*, title, og_title, og_type, canonical, page_type, main):
+def render_page(*, title, og_title, og_type, canonical, page_type, main, path_prefix="./"):
     tpl = (ROOT / "templates" / "base.html").read_text(encoding="utf-8")
     repl = {
         "<!--LANG-->": LANG,
@@ -133,7 +133,8 @@ def render_page(*, title, og_title, og_type, canonical, page_type, main):
         "<!--OG_TITLE-->": html.escape(og_title),
         "<!--OG_TYPE-->": og_type,
         "<!--PAGE_TYPE-->": page_type,
-        "<!--NAV-->": nav_html(),
+        "<!--PRE-->": path_prefix,
+        "<!--NAV-->": nav_html(path_prefix),
         "<!--MAIN-->": main,
         "<!--FOOTER_FORM-->": FOOTER_FORM,
     }
@@ -219,6 +220,7 @@ def main():
                 canonical=f"{DOMAIN}/{slug}/",
                 page_type="page",
                 main=pg["html"],
+                path_prefix="../",
             ),
         )
 
@@ -240,6 +242,7 @@ def main():
                 canonical=f"{DOMAIN}/{slug}/",
                 page_type="post",
                 main=main_html,
+                path_prefix="../",
             ),
         )
 
@@ -248,7 +251,7 @@ def main():
         '<li data-tags="">'
         f'<span><i><time datetime="{p["date_iso"]}">'
         f'{fmt_date(p["date_iso"])}</time></i></span>'
-        f'<a href="/{p["slug"]}/">{html.escape(p["title"])}</a>'
+        f'<a href="../{p["slug"]}/">{html.escape(p["title"])}</a>'
         "</li>"
         for p in posts
     ]
@@ -261,6 +264,7 @@ def main():
             canonical=f"{DOMAIN}/blog/",
             page_type="blog",
             main='<ul class="blog-posts">\n' + "\n".join(rows) + "\n</ul>",
+            path_prefix="../",
         ),
     )
 
