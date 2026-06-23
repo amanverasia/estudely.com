@@ -187,6 +187,9 @@ def main():
     # static assets (style.css, favicon files, etc.) -> /static/
     if (ROOT / "static").exists():
         shutil.copytree(ROOT / "static", OUT / "static")
+    # CNAME file (custom domain, required by GitHub Pages)
+    if (ROOT / "CNAME").exists():
+        shutil.copy2(ROOT / "CNAME", OUT / "CNAME")
 
     pages = load("content/pages")
     posts = load("content/posts")
