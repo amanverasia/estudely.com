@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const links = [
+  { label: 'YouTube Channel', href: 'https://youtube.com/estudely' },
+  { label: 'Instagram (Personal)', href: 'https://instagram.com/amanverasia' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/amanverasia' },
+  { label: 'GitHub', href: 'https://github.com/amanverasia' },
+  { label: 'BlueSky (Personal)', href: 'https://bsky.app/profile/amanverasia.com' },
+  { label: 'X (Personal)', href: 'https://x.com/amanverasia' },
+  { label: 'X (Estudely)', href: 'https://x.com/estudely' },
+];
+
+const signal = [
+  { label: 'Estudely (Announcements)', href: 'https://link.estudely.com/signal' },
+  { label: 'Estudely #general', href: 'https://link.estudely.com/general' },
+  { label: 'Estudely #knowledge-hub', href: 'https://link.estudely.com/knowledge-hub' },
+  { label: 'Estudely #scam-baiting', href: 'https://link.estudely.com/scam-baiting' },
+];
+---
+<BaseLayout title="Join Community" description="Connect with the Estudely community across YouTube, Signal, WhatsApp, and more.">
+  <Header />
+  <main class="wrap">
+    <article class="prose">
+      <div class="post-meta">// join-us</div>
+      <h1 class="page-h1">join the community</h1>
+      <p>Estudely is a community of people who are interested in learning tech.
+         You can find us on the links below.</p>
+      <ul class="links">
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+      <h2>community invites</h2>
+      <p><strong>WhatsApp</strong></p>
+      <ul class="links">
+        <li><a href="https://link.estudely.com/whatsapp">WhatsApp Community</a></li>
+      </ul>
+      <p><strong>Signal</strong></p>
+      <ul class="links">
+        {signal.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  article { padding: 36px 0 0; }
+  .post-meta { font-family: var(--mono); font-size: 13px; color: var(--fg-faint); margin-bottom: 14px; }
+  .page-h1 { font-family: var(--mono); font-size: 28px; letter-spacing: -.5px; margin: 0 0 28px; }
+  .links { list-style: none; padding-left: 0; font-family: var(--mono); font-size: 14px; }
+  .links a { border-bottom: 1px solid var(--border); }
+</style>
