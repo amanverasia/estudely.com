@@ -1,11 +1,25 @@
 # estudely.com
 
-A static, GitHub Pages–hosted replica of the [Estudely](https://estudely.com)
-blog, faithfully reproducing [Bear Blog](https://bearblog.dev)'s default theme.
-The content lives in plain Markdown; `build.py` renders it into the Bear Blog
-HTML skeleton and pushes the result to GitHub Pages automatically on every push.
+[![Live site](https://img.shields.io/website?up_color=%234c1&down_color=%23e05d44&down_message=offline&up_message=online&url=https%3A%2F%2Festudely.com)](https://estudely.com)
 
-## Layout
+Source for the **[Estudely](https://estudely.com)** blog — a tech-learning
+community focused on programming, cybersecurity, and AI. This repo builds a
+fast, minimal, static site that faithfully reproduces
+[Bear Blog](https://bearblog.dev)'s default theme and hosts it on GitHub Pages.
+
+Content is plain Markdown; [`build.py`](build.py) renders it into the Bear Blog
+HTML skeleton and a GitHub Actions workflow deploys automatically on every push
+to `main`.
+
+## ✨ Features
+
+- ⚡ **Static & fast** — no JavaScript frameworks, no tracking, no backend.
+- ✍️ **Markdown content** — write posts in `content/posts/`, they just work.
+- 🎨 **Bear Blog theme** — clean, readable, ~720px column, dark-on-light.
+- 📡 **RSS feed** auto-generated at `/feed.xml`.
+- 🚀 **Deploys itself** — push to `main`, GitHub Pages goes live within a minute.
+
+## 📁 Layout
 
 ```
 build.py              # static generator (markdown -> Bear Blog HTML)
@@ -18,51 +32,68 @@ content/
 CNAME                 # custom domain: estudely.com
 ```
 
-## Editing
+## 🛠️ Run locally
 
-- **New post:** drop a file in `content/posts/my-post.md`:
-  ```markdown
-  ---
-  title: My Post
-  date: 2026-06-23T10:00:00+00:00
-  slug: my-post
-  ---
-
-  Write your post in Markdown here.
-  ```
-- **New page:** same idea in `content/pages/`, then link it from `NAV` in `build.py`.
-- Commit and push — the workflow rebuilds and deploys automatically.
-
-## Run locally
+You'll need Python 3.10+.
 
 ```bash
 python3 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
-python build.py      # writes ./public/
-python -m http.server -d public 8000   # preview at http://localhost:8000
+python build.py                       # writes ./public/
+python -m http.server -d public 8000  # preview at http://localhost:8000
 ```
 
-## Custom domain (estudely.com)
+## ✍️ Writing a post
 
-This repo ships a `CNAME` so GitHub Pages expects `estudely.com`. To make the
-domain resolve here:
+1. Create `content/posts/my-post.md`:
 
-1. GitHub repo → **Settings → Pages** → set **Source** to *GitHub Actions*.
-2. In your DNS provider, point `estudely.com` at GitHub Pages:
-   - **A records** for the apex: `185.199.108.153`, `109`, `110`, `111`
-   - (optional) `www` → `amanverasia.github.io.` as a CNAME.
-3. Until DNS is repointed, the site is live at
-   `https://amanverasia.github.io/estudely.com/` (note: internal links are
-   root-relative, so they resolve correctly once the apex domain is active).
+   ```markdown
+   ---
+   title: My Post
+   date: 2026-06-23T10:00:00+00:00
+   slug: my-post
+   ---
 
-## Notes on fidelity
+   Write your post in Markdown here.
+   ```
 
-- The theme is Bear Blog's stock `default.css`; the only deviation from upstream
-  is `--width: 720px` (matches the live site).
-- **Email subscribe form:** Bear Blog's form needs a backend; GitHub Pages is
-  static. The form is kept *visually identical* but submit is handled
-  client-side with a friendly message. To collect real subscribers, wire
-  `estudelySubscribe()` in `build.py` to a service (Buttondown, Formspree,
-  ConvertKit, etc.).
-- Bear Blog's analytics/upvote widgets are server-side features and are not
-  reproduced (they require a backend). RSS is reproduced at `/feed.xml`.
+2. Commit and push to `main`. The workflow rebuilds and deploys automatically.
+
+To add a standalone (non-blog) page, drop the same front-matter file in
+`content/pages/` and add it to the `NAV` list in [`build.py`](build.py).
+
+## 🧩 How it works
+
+- [`build.py`](build.py) reads every `.md` under `content/`, converts it to HTML
+  with [python-markdown](https://python-markdown.github.io/), and slots it into
+  [`templates/base.html`](templates/base.html).
+- Posts are listed newest-first at `/blog/`; each gets a flat `/slug/` permalink.
+- An Atom feed is generated at `/feed.xml`.
+- Site config (title, description, nav, domain) lives at the top of
+  [`build.py`](build.py).
+
+## 🌐 Custom domain
+
+This repo ships a [`CNAME`](CNAME) so GitHub Pages serves `estudely.com`. To
+point your own domain at a fork:
+
+1. Repo **Settings → Pages → Source** = *GitHub Actions*.
+2. Add DNS records at your provider:
+   - **A records** (apex): `185.199.108.153`, `.109`, `.110`, `.111`
+   - (optional) `www` → `<user>.github.io.` as a CNAME.
+3. Update the `CNAME` file and `DOMAIN` in [`build.py`](build.py).
+
+## 📜 License & content
+
+The **theme/HTML** (Bear Blog's `default.css` skeleton) belongs to
+[Bear Blog](https://bearblog.dev) / Herman Martinus.
+
+All **blog content** under [`content/`](content/) (posts and pages) is © Estudely
+and is **not** licensed for redistribution — please don't copy the articles.
+The build tooling itself is free to read, fork, and learn from.
+
+## 🔗 Links
+
+- 🌍 **Live site:** [estudely.com](https://estudely.com)
+- 📺 **Estudely community:** programming, cybersecurity & AI education
+- 🧱 **Built on:** [Bear Blog](https://bearblog.dev) · [GitHub Pages](https://pages.github.com)
