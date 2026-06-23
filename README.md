@@ -38,7 +38,7 @@ public/                     # CNAME, favicon.svg, robots.txt
 
 ## Run locally
 
-You'll need Node 20+.
+You'll need Node 22+.
 
 ```bash
 npm install
