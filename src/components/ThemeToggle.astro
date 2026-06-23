@@ -1,0 +1,25 @@
+<button class="toggle" id="theme-toggle" aria-label="Toggle theme">☾</button>
+<style>
+  .toggle {
+    background: none; border: 1px solid var(--border); color: var(--fg-dim);
+    border-radius: 6px; width: 32px; height: 32px; cursor: pointer;
+    font-size: 14px; display: grid; place-items: center; transition: all .2s;
+  }
+  .toggle:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+<script is:inline>
+  (() => {
+    const btn = document.getElementById('theme-toggle');
+    const sync = () =>
+      (btn.textContent =
+        document.documentElement.getAttribute('data-theme') === 'light' ? '☀' : '☾');
+    sync();
+    btn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      sync();
+    });
+  })();
+</script>
